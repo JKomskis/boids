@@ -254,6 +254,10 @@ describe("normalize", () => {
         .equal(new Vector(0, Math.sin(Math.PI / 4), Math.cos(Math.PI / 4)))
     ).toBe(true);
   });
+
+  it("returns the zero vector when the given vector is the zero vector", () => {
+    expect(new Vector(0, 0, 0).normalize()).toEqual(new Vector(0, 0, 0));
+  });
 });
 
 describe("dot", () => {
