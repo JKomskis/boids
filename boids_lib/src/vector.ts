@@ -1,7 +1,7 @@
 class Vector {
-  private static EPS = 0.000001;
+  static ZERO_VECTOR = new Vector(0, 0, 0);
 
-  private static ZERO_VECTOR = new Vector(0, 0, 0);
+  private static EPS = 0.000001;
 
   private x: number;
 
@@ -9,7 +9,7 @@ class Vector {
 
   private z: number;
 
-  constructor(x: number, y: number, z: number) {
+  constructor(x = 0, y = 0, z = 0) {
     this.x = x;
     this.y = y;
     this.z = z;
@@ -76,6 +76,30 @@ class Vector {
       throw new Error("Cannot find angle between a vector and the 0 vector.");
     }
     return Math.acos(this.dot(other) / (this.length() * other.length()));
+  }
+
+  distance(other: Vector): number {
+    return this.subtract(other).length();
+  }
+
+  distance2(other: Vector): number {
+    return this.subtract(other).length2();
+  }
+
+  toString(): string {
+    return `{X: ${this.x}, Y: ${this.y}, Z: ${this.z}}`;
+  }
+
+  getX(): number {
+    return this.x;
+  }
+
+  getY(): number {
+    return this.y;
+  }
+
+  getZ(): number {
+    return this.z;
   }
 }
 

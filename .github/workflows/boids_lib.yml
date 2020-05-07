@@ -46,10 +46,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js 14
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
     - name: Cache node modules
       uses: actions/cache@v1
       env:
@@ -61,5 +57,10 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
+    - name: Use Node.js 14
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+
     - run: npm ci
     - run: npm run lint

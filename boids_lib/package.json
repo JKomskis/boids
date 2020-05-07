@@ -2,7 +2,8 @@
   "name": "boids_lib",
   "version": "1.0.0",
   "description": "Typescript library implementing the boids algorithm",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "directories": {
     "test": "test"
   },
