@@ -1,5 +1,5 @@
 import { describe, it, expect } from "@jest/globals";
-import Vector from "../src/vector";
+import Vector from "../src/Vector";
 
 describe("length", () => {
   it("returns 0 when given the 0 vector", () => {
