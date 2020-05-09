@@ -3,20 +3,19 @@ import Vector from "../Vector";
 import FlockSettings from "../FlockSettings";
 import Boid from "../Boid";
 
-class FlyTowardsCenterRule implements Rule {
-  private enabled: boolean;
-
+class FlyTowardsCenterRule extends Rule {
   private flockSettings: FlockSettings;
 
+  private turningFactor = 0.1;
+
   constructor(settings: FlockSettings) {
-    this.enabled = true;
+    super();
     this.flockSettings = settings;
   }
 
-  apply(boid: Boid, boids: Array<Boid>): Vector {
-    if (!this.enabled) return Vector.ZERO_VECTOR;
-
+  doApply(boid: Boid, boids: Boid[]): Vector {
     let vectorToCenter = Vector.ZERO_VECTOR;
+    let numNeighbors = 0;
     boids.forEach((otherBoid) => {
       if (
         otherBoid !== boid &&
@@ -24,9 +23,22 @@ class FlyTowardsCenterRule implements Rule {
           this.flockSettings.getVisualRange()
       ) {
         vectorToCenter = vectorToCenter.add(otherBoid.getPosition());
+        numNeighbors += 1;
       }
     });
-    return vectorToCenter;
+    if (numNeighbors === 0) return Vector.ZERO_VECTOR;
+    vectorToCenter = vectorToCenter.divide(numNeighbors);
+    return vectorToCenter
+      .subtract(boid.getPosition())
+      .multiply(this.turningFactor);
+  }
+
+  getTurningFactor(): number {
+    return this.turningFactor;
+  }
+
+  setTurningFactor(newFactor: number): void {
+    this.turningFactor = newFactor;
   }
 }
 

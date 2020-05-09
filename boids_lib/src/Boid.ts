@@ -22,8 +22,14 @@ class Boid {
     this.velocity = this.velocity.add(newVelocity);
   }
 
+  limitSpeed(speedLimit: number): void {
+    if (this.velocity.length() > speedLimit) {
+      this.velocity = this.velocity.normalize().multiply(speedLimit);
+    }
+  }
+
   tick(timeMs: number): void {
-    this.position = this.position.add(this.velocity.multiply(timeMs));
+    this.position = this.position.add(this.velocity.multiply(timeMs / 1000));
   }
 }
 

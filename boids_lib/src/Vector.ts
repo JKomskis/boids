@@ -53,7 +53,7 @@ class Vector {
   }
 
   normalize(): Vector {
-    if (this.equal(Vector.ZERO_VECTOR)) {
+    if (this.equal(Vector.ZERO_VECTOR) || this.length() === 0) {
       return this;
     }
     return this.divide(this.length());
